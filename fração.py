@@ -130,10 +130,10 @@ class Fração:
 if __name__ == '__main__':
     
     # Programa principal de teste da classe Fração
-    x = Fração(-2, -8)
+    x = Fração(-2)
     y = Fração(1, -2)
     z = x + y
-    w = Fração(0,4)
+    w = Fração(15)
     print(w)
     print(z)
     print (x < y or x < z)

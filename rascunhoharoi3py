@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Oct 15 13:05:29 2021
+
+@author: lyliana
+"""
+        
+def Hanoi(n, torreA, torreB, torreAux):
+    t = Towers(n)
+    #print(t)
+    if n == 1:
+        # mover disco 1 da torreA para a torreB
+        Movimente(t,1, torreA, torreB)
+    else:
+        # n - 1 discos da torreA para torreAux com torreB auxiliar
+        Hanoi(n - 1, torreA, torreAux, torreB)
+        # mover disco n da torreA para torreB
+        Movimente(t,n,  torreA,torreB)
+        # n - 1 discos da torreAux para a torreB com torreA auxiliar
+        Hanoi(n - 1, torreAux, torreB, torreA)
+
+def Movimente(t,k, origem, destino):
+    print("mover disco ", k, " da torre ", origem, " para a torre ", destino) 
+    t.move(origem,destino)
+    print(t)
+
+class Towers:
+    def __init__(self, n):
+        self.disks = n
+        self.towers = [[]]*3
+        self.towers[0] = [i for i in range(self.disks, 0, -1)]
+        self.towers[1] = []
+        self.towers[2] = []
+
+    
+    def move(self, origem, destino):
+        if len(self.towers[origem]) == 0:
+            return self.towers
+        else:
+            disco = self.towers[origem].pop()
+            self.towers[destino].append(disco)
+            print(self.towers[0])
+            print(self.towers[1])
+            print(self.towers[2])
+            return self.towers
+       
+    def __str__(self):
+        output = ""
+        for i in range(self.disks, -1, -1):
+            for j in range(3):
+                if len(self.towers[j]) > i:
+                    output += " " + str(self.towers[j][i])
+                else:
+                    output += "  "
+            output += "\n"
+
+        return output + " A B C"
+    
+print("\n* * * Movimentar 2 discos * * *")
+Hanoi(2, 0, 1, 2)
